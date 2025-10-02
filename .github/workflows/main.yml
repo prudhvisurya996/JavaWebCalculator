@@ -1,41 +1,36 @@
 name: githubactions
 
 on:
-  workflow_dispatch:   
+  workflow_dispatch:
 
 jobs:
-  clone:               
+  clone:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-            # Setup java 17 to be default (sonar-scanner requirement as of 5.x)
+
+      # Setup Java 17 (required by sonar-scanner 5.x)
       - name: Set Java 17
         uses: actions/setup-java@v3
         with:
-         distribution: 'temurin' # See 'Supported distributions' for available options
-         java-version: '17'
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name: Generating artifact
-        run:  mvn package
+      - name: Build project
+        run: mvn package
 
-        # Setup sonar-scanner
+      # Setup sonar-scanner
       - name: Setup SonarQube
         uses: warchant/setup-sonar-scanner@v7
 
-      - name: SonarQube Scan
+      - name: SonarCloud Scan
         run: |
           sonar-scanner \
-            -Dsonar.host.url=${{ secrets.SONAR_URL }} \
+            -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.organization=${{ secrets.SONAR_ORG }} \
             -Dsonar.projectKey=${{ secrets.SONAR_PROJ }} \
             -Dsonar.sources=src \
             -Dsonar.junit.reportPaths=target/surefire-reports
-
-
-
-
-
-

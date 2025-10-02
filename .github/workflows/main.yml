@@ -29,6 +29,6 @@ jobs:
             -Dsonar.organization=${{ secrets.SONAR_ORG }}
             -Dsonar.projectKey=${{ secrets.SONAR_PROJ }}
             -Dsonar.sources=src
-            -Dsonar.junit.reportPaths=target/surefire-reports
+           
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

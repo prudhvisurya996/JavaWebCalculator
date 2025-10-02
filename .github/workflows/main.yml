@@ -20,3 +20,20 @@ jobs:
       - name: Generating artifact
         run:  mvn package
 
+        # Setup sonar-scanner
+      - name: Setup SonarQube
+        uses: warchant/setup-sonar-scanner@v7
+
+          # Run sonar-scanner
+      - name: SonarQube Scan
+        run: sonar-scanner \
+         -Dsonar.host.url=${{ secrets.SONAR_URL }} \
+         -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+         -Dsonar.projectKey=${{ secrets.SONAR_PROJ }} \
+         -Dsonar.sources=src \
+         -Dsonar.junit.reportPaths=target/surefire-reports
+
+
+
+
+

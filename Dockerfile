@@ -2,10 +2,10 @@
 FROM tomcat:9.0
 
 # Copy your WAR file into the webapps directory
-COPY */webapp-0.1.war /usr/local/tomcat/webapps/
+COPY target/*.war /usr/local/tomcat/webapps/
 
 # Expose the default Tomcat port
-EXPOSE 8085
+EXPOSE 8080
 
 # Start Tomcat
 CMD ["catalina.sh", "run"]

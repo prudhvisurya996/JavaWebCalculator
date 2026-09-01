@@ -4,7 +4,9 @@
     name: java-web-calculator
     annotations:
       github.com/project-slug: Rupessh-Metra/JavaWebCalculator
+      backstage.io/kubernetes-id: java-web-calculator
   spec:
     type: service
     lifecycle: production
     owner: developers
+  
